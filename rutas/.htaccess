@@ -1,0 +1,19 @@
+# Permitir acceso a todos los archivos PHP en la carpeta
+<FilesMatch "\.php$">
+    Require all granted
+</FilesMatch>
+
+# Si quieres permitir el acceso a archivos específicos
+<Files "getDatos.php">
+    Require all granted
+</Files>
+
+RewriteEngine On
+# Excluir la carpeta 'rutas' de las reglas de reescritura
+RewriteCond %{REQUEST_URI} !^/rutas/
+RewriteRule ^(.*)$ /index.php [L]
+# Redirigir todas las solicitudes a index.php (si es necesario)
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
